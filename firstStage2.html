@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Future of Health Slide Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-slate: #f8fafc;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --primary-blue: #2563eb;
+        --accent-red: #ef4444;
+        --accent-green: #10b981;
+        --border-slate: #e2e8f0;
+        --nav-height: 70px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: white;
+        color: var(--text-main);
+        line-height: 1.5;
+        padding-top: var(--nav-height);
+      }
+
+      /* Fixed Top Navbar (Global Navigation) */
+      .main-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--nav-height);
+        background: white;
+        border-bottom: 1px solid var(--border-slate);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+        z-index: 1000;
+      }
+
+      .nav-logo {
+        font-weight: 800;
+        font-size: 1.2rem;
+        color: var(--primary-blue);
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 25px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--primary-blue);
+      }
+
+      /* Main Content Container */
+      .content-wrapper {
+        padding: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Slide Navigation (Page-Specific Tabs) */
+      .slide-nav {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        padding: 10px;
+        background: var(--bg-slate);
+        border-radius: 12px;
+        border: 1px solid var(--border-slate);
+        overflow-x: auto;
+      }
+
+      .slide-nav button {
+        padding: 8px 16px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text-muted);
+        border-radius: 8px;
+        white-space: nowrap;
+        transition: all 0.2s;
+      }
+
+      .slide-nav button.active {
+        background: white;
+        color: var(--primary-blue);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .slide {
+        display: none;
+        animation: fadeIn 0.4s ease-out;
+      }
+      .slide.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      header {
+        border-bottom: 2px solid var(--border-slate);
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        letter-spacing: -0.025em;
+      }
+      .highlight {
+        color: var(--primary-blue);
+      }
+      .subtitle {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      /* Grid Layouts */
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .crisis-card {
+        background: #fff;
+        border: 2px solid var(--border-slate);
+        border-radius: 20px;
+        padding: 24px;
+        transition: transform 0.2s;
+      }
+
+      .crisis-card:hover {
+        border-color: var(--accent-red);
+        transform: translateY(-4px);
+      }
+
+      .crisis-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        display: block;
+      }
+      .crisis-title {
+        font-weight: 800;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        display: block;
+        color: var(--accent-red);
+      }
+
+      .crisis-list {
+        list-style: none;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+      .crisis-list li {
+        margin-bottom: 10px;
+        padding-left: 15px;
+        position: relative;
+      }
+      .crisis-list li::before {
+        content: "•";
+        color: var(--accent-red);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+      }
+
+      .impact-box {
+        background: #fef2f2;
+        border-radius: 20px;
+        padding: 25px;
+        border: 1px dashed var(--accent-red);
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .stat-circle {
+        width: 80px;
+        height: 80px;
+        background: white;
+        border: 3px solid var(--accent-red);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .stat-value {
+        font-weight: 900;
+        font-size: 1.4rem;
+        color: var(--accent-red);
+      }
+      .stat-label {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: var(--text-muted);
+      }
+
+      footer {
+        margin-top: 60px;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        padding: 25px;
+        border-top: 1px solid var(--border-slate);
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Global Navbar -->
+    <nav class="main-navbar">
+      <a href="#" class="nav-logo">FutureHealth_</a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Overview</a>
+        <a href="firstStage2.html">Stage 1</a>
+        <a href="secondStage.html">Stage 2</a>
+        <a href="#impact">Impact</a>
+      </div>
+    </nav>
+
+    <div class="content-wrapper">
+      <!-- In-Page Slide Navigation -->
+      <div class="slide-nav">
+        <button
+          onclick="showSlide('overview')"
+          id="btn-overview"
+          class="active"
+        >
+          0. Home Overview
+        </button>
+        <button onclick="showSlide('segment1')" id="btn-segment1">
+          1. The Crisis Zone
+        </button>
+        <button onclick="showSlide('segment2')" id="btn-segment2">
+          2. API Hub
+        </button>
+        <button onclick="showSlide('segment3')" id="btn-segment3">
+          3. ROI & Future
+        </button>
+      </div>
+
+      <!-- SLIDE 0: Overview -->
+      <div id="overview" class="slide active">
+        <header>
+          <h1>Future of Health: <span class="highlight">Ecosystem</span></h1>
+          <p class="subtitle">
+            Moving from Algorithmic Dehumanization to Systemic Rest
+          </p>
+        </header>
+
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            background: var(--bg-slate);
+            padding: 40px;
+            border-radius: 30px;
+          "
+        >
+          <div style="text-align: center; flex: 1">
+            <span style="font-size: 3rem">⛓️</span>
+            <h3 style="margin-top: 10px">The Problem</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted)">
+              Devaluation & Dehumanization
+            </p>
+          </div>
+          <div style="font-size: 2rem; color: var(--border-slate)">➜</div>
+          <div
+            style="
+              text-align: center;
+              flex: 1;
+              background: white;
+              padding: 20px;
+              border-radius: 20px;
+              box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+            "
+          >
+            <span style="font-size: 3rem">🔌</span>
+            <h3 style="margin-top: 10px; color: var(--primary-blue)">
+              The Solution
+            </h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted)">
+              Portable Benefits API
+            </p>
+          </div>
+          <div style="font-size: 2rem; color: var(--border-slate)">➜</div>
+          <div style="text-align: center; flex: 1">
+            <span style="font-size: 3rem">🧘</span>
+            <h3 style="margin-top: 10px">The Result</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted)">
+              Sustainable Productivity
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 1: The Crisis Zone -->
+      <div id="segment1" class="slide">
+        <header>
+          <h1>
+            Segment 1:
+            <span style="color: var(--accent-red)">The Algorithmic Crisis</span>
+          </h1>
+          <p class="subtitle">
+            Why current gig models are "taxing" the Nigerian youth population
+          </p>
+        </header>
+
+        <div class="grid-3">
+          <div class="crisis-card">
+            <span class="crisis-icon">📱</span>
+            <span class="crisis-title">Incentive Dehumanization</span>
+            <ul class="crisis-list">
+              <li>
+                <strong>Late-night Surcharge:</strong> UI prompts push drivers
+                to work at 2 AM for ₦50k.
+              </li>
+              <li>
+                <strong>Rating Anxiety:</strong> Algorithms prioritize "Success
+                Scores" over health.
+              </li>
+              <li>
+                <strong>Naira Devaluation:</strong> Labor requirements doubled
+                for the same value since 2022.
+              </li>
+            </ul>
+          </div>
+
+          <div class="crisis-card">
+            <span class="crisis-icon">⚡</span>
+            <span class="crisis-title">Infrastructure Friction</span>
+            <ul class="crisis-list">
+              <li>
+                <strong>Imported Models:</strong> US/UK designs fail in Lagos
+                traffic realities.
+              </li>
+              <li>
+                <strong>Power Shortage:</strong> "Nepa Anxiety" creates constant
+                biological stress.
+              </li>
+              <li>
+                <strong>Friction Factor:</strong> High-tension environments turn
+                code into health hazards.
+              </li>
+            </ul>
+          </div>
+
+          <div class="crisis-card">
+            <span class="crisis-icon">🚭</span>
+            <span class="crisis-title">The Biological Tax</span>
+            <ul class="crisis-list">
+              <li>
+                <strong>Chronic Isolation:</strong> No "Water-cooler" social
+                aids for gig workers.
+              </li>
+              <li>
+                <strong>NHIA Policy Gap:</strong> 80% of informal workers remain
+                invisible to law.
+              </li>
+              <li>
+                <strong>Cortisol Spikes:</strong> Long-term neurological health
+                decline from tension.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="impact-box">
+          <div class="stat-circle">
+            <span class="stat-value">15</span>
+            <span class="stat-label">Cigs/Day</span>
+          </div>
+          <div>
+            <h4 style="font-weight: 800; color: var(--accent-red)">
+              The Isolation Equivalence
+            </h4>
+            <p style="font-size: 0.9rem">
+              "The isolation in the gig economy is as chronic as taking 15
+              cigarettes every day."
+            </p>
+            <p
+              style="
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 5px;
+              "
+            >
+              — Quote from Discovery Phase
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: API Architecture -->
+      <div id="segment2" class="slide">
+        <header>
+          <h1>
+            Segment 2: <span class="highlight">The API Architecture</span>
+          </h1>
+          <p class="subtitle">Building a health-focused middleware layer</p>
+        </header>
+        <div class="crisis-card" style="border-color: var(--primary-blue)">
+          <p>
+            <strong>Portable Benefits API:</strong> A system that connects
+            various gig platforms to a centralized health BVN, allowing benefits
+            to follow the worker, not the platform.
+          </p>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: ROI -->
+      <div id="segment3" class="slide">
+        <header>
+          <h1>
+            Segment 3:
+            <span style="color: var(--accent-green)"
+              >Economic & Social ROI</span
+            >
+          </h1>
+          <p class="subtitle">The long-term value of a rested workforce</p>
+        </header>
+        <p>
+          A healthier workforce leads to 40% higher long-term productivity and
+          reduced national healthcare strain.
+        </p>
+      </div>
+
+      <footer>
+        "Health is no longer built with wards, but by lines of code." —
+        Presentation Mode
+      </footer>
+    </div>
+
+    <script>
+      function showSlide(slideId) {
+        // Hide all slides
+        document
+          .querySelectorAll(".slide")
+          .forEach((s) => s.classList.remove("active"));
+        // Remove active class from buttons
+        document
+          .querySelectorAll(".slide-nav button")
+          .forEach((b) => b.classList.remove("active"));
+
+        // Show selected
+        document.getElementById(slideId).classList.add("active");
+        document.getElementById("btn-" + slideId).classList.add("active");
+      }
+    </script>
+  </body>
+</html>
