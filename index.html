@@ -35,6 +35,37 @@
         padding: 40px;
       }
 
+      /* Navigation */
+      /* Navigation */
+      nav {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        padding: 10px;
+        background: var(--bg-slate);
+        border-radius: 12px;
+        border: 1px solid var(--border-slate);
+        overflow-x: auto;
+      }
+
+      nav button {
+        padding: 8px 16px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text-muted);
+        border-radius: 8px;
+        white-space: nowrap;
+        transition: all 0.2s;
+      }
+
+      nav button.active {
+        background: white;
+        color: var(--primary-blue);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
       /* Header */
       header {
         border-bottom: 2px solid var(--border-slate);
@@ -240,7 +271,7 @@
         <div class="nav-links">
           <a href="index.html">Overview</a>
           <a href="firstStage.html">Stage 1</a>
-          <a href="secondStage.html">Stage 2</a>
+          <a href="secondStage.html">Stage 2(final)</a>
           <!-- <a href="#segment3">Impact</a> -->
         </div>
       </nav>
