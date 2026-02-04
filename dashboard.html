@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FutureHealth | Dual-Perspective Control Tower</title>
+    <title>FutureHealth | Entry Portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,7 +13,6 @@
     <style>
       :root {
         --bg-main: #020617;
-        --sidebar-bg: #0f172a;
         --card-bg: #0f172a;
         --text-main: #f1f5f9;
         --text-muted: #64748b;
@@ -22,7 +21,6 @@
         --accent-emerald: #10b981;
         --accent-rose: #f43f5e;
         --border-color: #1e293b;
-        --sidebar-width: 280px;
       }
 
       * {
@@ -36,568 +34,192 @@
         background-color: var(--bg-main);
         color: var(--text-main);
         display: flex;
-        height: 100vh;
-        overflow: hidden;
-      }
-
-      /* Sidebar Navigation */
-      aside {
-        width: var(--sidebar-width);
-        background: var(--sidebar-bg);
-        color: white;
-        display: flex;
-        flex-direction: column;
-        padding: 24px;
-        flex-shrink: 0;
-        border-right: 1px solid var(--border-color);
-      }
-
-      .logo-area {
-        display: flex;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 30px;
-        padding: 0 8px;
+        justify-content: center;
+        min-height: 100vh;
+        background-image:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(99, 102, 241, 0.05) 0%,
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(6, 182, 212, 0.05) 0%,
+            transparent 40%
+          );
+      }
+
+      .container {
+        max-width: 900px;
+        width: 90%;
+        text-align: center;
+        padding: 40px 20px;
       }
 
       .logo-icon {
-        width: 36px;
-        height: 36px;
+        width: 64px;
+        height: 64px;
         background: linear-gradient(
           135deg,
           var(--primary-brand),
           var(--accent-cyan)
         );
-        border-radius: 12px;
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 800;
-        font-size: 1.2rem;
+        font-size: 2rem;
+        margin: 0 auto 24px;
+        box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
       }
 
-      /* Role Switcher */
-      .role-switcher {
-        background: #1e293b;
-        border-radius: 12px;
-        padding: 4px;
-        display: flex;
-        margin-bottom: 32px;
-      }
-
-      .role-btn {
-        flex: 1;
-        padding: 8px;
-        border-radius: 8px;
-        border: none;
-        background: transparent;
-        color: #94a3b8;
-        font-size: 0.7rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s;
-        text-transform: uppercase;
-      }
-
-      .role-btn.active {
-        background: var(--primary-brand);
-        color: white;
-      }
-
-      .nav-group {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .nav-item {
-        padding: 12px 16px;
-        border-radius: 10px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: #94a3b8;
-        font-weight: 500;
-        transition: all 0.2s;
-        text-decoration: none;
-        font-size: 0.85rem;
-      }
-
-      .nav-item:hover {
-        background: rgba(255, 255, 255, 0.03);
-        color: white;
-      }
-
-      .nav-item.active {
-        background: rgba(99, 102, 241, 0.1);
-        color: var(--primary-brand);
-        border-left: 3px solid var(--primary-brand);
-        border-radius: 0 10px 10px 0;
-      }
-
-      .nav-label {
-        font-size: 0.65rem;
-        text-transform: uppercase;
-        color: #475569;
-        margin: 24px 0 8px 16px;
-        font-weight: 700;
-        letter-spacing: 0.15em;
-      }
-
-      /* Main Content Area */
-      main {
-        flex-grow: 1;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-      }
-
-      header {
-        background: rgba(2, 6, 23, 0.8);
-        backdrop-filter: blur(12px);
-        height: 80px;
-        border-bottom: 1px solid var(--border-color);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 40px;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-      }
-
-      .dashboard-content {
-        padding: 40px;
-        max-width: 1400px;
-        margin: 0 auto;
-        width: 100%;
-      }
-
-      /* Grid Layouts */
-      .exec-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
-        margin-bottom: 32px;
-      }
-
-      .exec-card {
-        background: var(--card-bg);
-        padding: 24px;
-        border-radius: 20px;
-        border: 1px solid var(--border-color);
-        transition: transform 0.2s;
-      }
-
-      .exec-title {
-        color: var(--text-muted);
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
         margin-bottom: 12px;
-        display: flex;
-        justify-content: space-between;
-      }
-
-      .exec-value {
-        font-size: 1.75rem;
-        font-weight: 700;
         letter-spacing: -0.02em;
       }
 
-      .grid-layout {
+      .subtitle {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        margin-bottom: 48px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .portal-grid {
         display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 24px;
-        margin-bottom: 24px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
       }
 
-      .content-card {
+      @media (max-width: 640px) {
+        .portal-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .portal-link {
         background: var(--card-bg);
-        border-radius: 24px;
         border: 1px solid var(--border-color);
+        border-radius: 24px;
         padding: 32px;
+        text-decoration: none;
+        color: white;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        position: relative;
+        overflow: hidden;
       }
 
-      .section-title {
+      .portal-link:hover {
+        border-color: var(--primary-brand);
+        transform: translateY(-8px);
+        background: rgba(15, 23, 42, 0.6);
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+      }
+
+      .portal-link span:first-child {
+        font-size: 2.5rem;
+      }
+
+      .portal-link h2 {
         font-size: 1.25rem;
         font-weight: 700;
-        margin-bottom: 24px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
       }
 
-      /* Charts */
-      .chart-container {
-        height: 180px;
-        display: flex;
-        align-items: flex-end;
-        gap: 12px;
-        margin-top: 20px;
+      .portal-link p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.5;
       }
 
-      .chart-bar {
-        flex: 1;
-        background: var(--primary-brand);
-        border-radius: 4px 4px 0 0;
-        opacity: 0.8;
-      }
-
-      /* View Handling */
-      .perspective-view {
-        display: none;
-      }
-
-      .perspective-view.active {
-        display: block;
-        animation: fadeIn 0.4s ease-out;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(5px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .tag {
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 0.65rem;
+      .btn-indicator {
+        margin-top: 12px;
+        font-size: 0.75rem;
         font-weight: 700;
         text-transform: uppercase;
-      }
-      .tag-emerald {
-        background: rgba(16, 185, 129, 0.1);
-        color: var(--accent-emerald);
-      }
-      .tag-rose {
-        background: rgba(244, 63, 94, 0.1);
-        color: var(--accent-rose);
-      }
-      .tag-cyan {
-        background: rgba(6, 182, 212, 0.1);
-        color: var(--accent-cyan);
+        letter-spacing: 0.1em;
+        color: var(--primary-brand);
+        display: flex;
+        align-items: center;
+        gap: 4px;
       }
     </style>
   </head>
   <body>
-    <!-- Executive Sidebar -->
-    <aside>
-      <div class="logo-area">
-        <div class="logo-icon">H</div>
-        <div>
-          <h2 style="font-size: 0.95rem">HealthFlow</h2>
-          <span
-            style="
-              font-size: 0.6rem;
-              color: #64748b;
-              font-weight: 700;
-              text-transform: uppercase;
-            "
-            >Governance Portal</span
-          >
-        </div>
+    <div class="container">
+      <div class="logo-icon">H</div>
+      <h1>HealthFlow Ecosystem</h1>
+      <p class="subtitle">
+        Welcome to the future of algorithmic labor health. Select a portal below
+        to begin exploration.
+      </p>
+
+      <div class="portal-grid">
+        <!-- 1. Overview -->
+        <a href="index.html" class="portal-link">
+          <span>📖</span>
+          <h2>The Overview</h2>
+          <p>
+            Research foundation, meeting agendas, and project structural
+            roadmap.
+          </p>
+          <div class="btn-indicator">Open index.html ➔</div>
+        </a>
+
+        <!-- 2. The Map -->
+        <a href="secondStage.html" class="portal-link">
+          <span>🗺️</span>
+          <h2>National Map</h2>
+          <p>
+            Live regional telemetry and algorithmic burnout heatmaps across
+            Nigeria.
+          </p>
+          <div class="btn-indicator">Open secondStage.html ➔</div>
+        </a>
+
+        <!-- 3. Worker Dashboard -->
+        <a href="workerDashboard.html" class="portal-link">
+          <span>🚲</span>
+          <h2>Worker Dashboard</h2>
+          <p>
+            The "Rest Bonus" interface for gig workers and individual health
+            wallets.
+          </p>
+          <div class="btn-indicator">Open workerDashboard.html ➔</div>
+        </a>
+
+        <!-- 4. Admin Dashboard -->
+        <a href="dashboard.html" class="portal-link">
+          <span>🏛️</span>
+          <h2>Admin Dashboard</h2>
+          <p>
+            Oversight for Regulators and Platform Admins to manage systemic
+            health.
+          </p>
+          <div class="btn-indicator">Open dashboard.html ➔</div>
+        </a>
       </div>
 
-      <div class="role-switcher">
-        <button
-          id="btn-gov"
-          class="role-btn active"
-          onclick="switchPerspective('gov')"
-        >
-          Regulator
-        </button>
-        <button
-          id="btn-org"
-          class="role-btn"
-          onclick="switchPerspective('org')"
-        >
-          Platform Admin
-        </button>
-      </div>
-
-      <div id="nav-gov" class="nav-group">
-        <div class="nav-label">National Policy</div>
-        <a href="#" class="nav-item active"
-          ><span>🏛️</span> Compliance Matrix</a
-        >
-        <a href="#" class="nav-item"><span>📉</span> Labor Health Tax</a>
-        <a href="#" class="nav-item"><span>⚖️</span> Benefit Portability</a>
-      </div>
-
-      <div id="nav-org" class="nav-group" style="display: none">
-        <div class="nav-label">Fleet Intelligence</div>
-        <a href="#" class="nav-item active"
-          ><span>🚀</span> Retention Metrics</a
-        >
-        <a href="#" class="nav-item"><span>⚡</span> Productivity Loss</a>
-        <a href="#" class="nav-item"><span>🌱</span> ESG Sustainability</a>
-      </div>
-
-      <div
+      <p
         style="
-          margin-top: auto;
-          padding: 20px;
-          background: rgba(0, 0, 0, 0.2);
-          border-radius: 16px;
+          margin-top: 64px;
+          font-size: 0.7rem;
+          color: #475569;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
         "
       >
-        <p style="font-size: 0.6rem; color: #64748b; margin-bottom: 8px">
-          SECURITY CLEARANCE
-        </p>
-        <div style="display: flex; align-items: center; gap: 8px">
-          <div
-            style="
-              width: 8px;
-              height: 8px;
-              background: var(--accent-emerald);
-              border-radius: 50%;
-            "
-          ></div>
-          <span style="font-size: 0.7rem; font-weight: 600" id="clearance-text"
-            >Level 4: Fed. Regulator</span
-          >
-        </div>
-      </div>
-    </aside>
-
-    <main>
-      <header>
-        <div>
-          <h1 id="view-title" style="font-size: 1.25rem; font-weight: 700">
-            National Regulatory Dashboard
-          </h1>
-          <p
-            id="view-subtitle"
-            style="font-size: 0.75rem; color: var(--text-muted)"
-          >
-            Ministry of Health & Labor Oversight
-          </p>
-        </div>
-      </header>
-
-      <div class="dashboard-content">
-        <!-- PERSPECTIVE: GOVERNMENT REGULATOR -->
-        <div id="perspective-gov" class="perspective-view active">
-          <div class="exec-grid">
-            <div class="exec-card">
-              <div class="exec-title">
-                Active Gig Sector <span class="tag tag-cyan">Population</span>
-              </div>
-              <div class="exec-value">12.2M</div>
-            </div>
-            <div class="exec-card">
-              <div class="exec-title">
-                Biological Tax <span class="tag tag-rose">Impact</span>
-              </div>
-              <div class="exec-value">₦2.4T</div>
-            </div>
-            <div class="exec-card">
-              <div class="exec-title">Benefit Enrolment</div>
-              <div class="exec-value">34.2%</div>
-            </div>
-            <div class="exec-card">
-              <div class="exec-title">Stress Incidence</div>
-              <div class="exec-value">High</div>
-            </div>
-          </div>
-
-          <div class="grid-layout">
-            <div class="content-card">
-              <div class="section-title">
-                National Stress-Expenditure Correlation
-              </div>
-              <p
-                style="
-                  font-size: 0.85rem;
-                  color: var(--text-muted);
-                  margin-bottom: 20px;
-                "
-              >
-                As platform algorithms tighten rating requirements, public
-                hospital mental health admissions in urban centers increase by
-                12% quarterly.
-              </p>
-              <div class="chart-container">
-                <div class="chart-bar" style="height: 30%"></div>
-                <div class="chart-bar" style="height: 45%"></div>
-                <div class="chart-bar" style="height: 60%"></div>
-                <div
-                  class="chart-bar"
-                  style="height: 85%; background: var(--accent-rose)"
-                ></div>
-              </div>
-            </div>
-            <div class="content-card">
-              <div class="section-title">Policy Levers</div>
-              <div style="display: flex; flex-direction: column; gap: 12px">
-                <button
-                  style="
-                    padding: 12px;
-                    background: #1e293b;
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    font-size: 0.7rem;
-                    cursor: pointer;
-                    text-align: left;
-                  "
-                >
-                  Adjust Portable Benefit %
-                </button>
-                <button
-                  style="
-                    padding: 12px;
-                    background: #1e293b;
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    font-size: 0.7rem;
-                    cursor: pointer;
-                    text-align: left;
-                  "
-                >
-                  Enforce Algorithmic Rest
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PERSPECTIVE: PLATFORM ADMIN (ORG) -->
-        <div id="perspective-org" class="perspective-view">
-          <div class="exec-grid">
-            <div class="exec-card">
-              <div class="exec-title">
-                Fleet Size <span class="tag tag-cyan">Internal</span>
-              </div>
-              <div class="exec-value">45.8k</div>
-            </div>
-            <div class="exec-card">
-              <div class="exec-title">
-                Churn Probability <span class="tag tag-rose">Risk</span>
-              </div>
-              <div class="exec-value">22%</div>
-            </div>
-            <div class="exec-card">
-              <div class="exec-title">Productivity Loss</div>
-              <div class="exec-value">₦14.2M</div>
-            </div>
-            <div class="exec-card">
-              <div class="exec-title">ESG Wellness Score</div>
-              <div class="exec-value">72/100</div>
-            </div>
-          </div>
-
-          <div class="grid-layout">
-            <div class="content-card">
-              <div class="section-title">Wellness vs. Fulfilment Rate</div>
-              <p
-                style="
-                  font-size: 0.85rem;
-                  color: var(--text-muted);
-                  margin-bottom: 20px;
-                "
-              >
-                Monitoring how "Friction Points" in the driver app directly
-                correlate to decreased shift duration and increased accident
-                risk.
-              </p>
-              <div class="chart-container">
-                <div
-                  class="chart-bar"
-                  style="height: 80%; background: var(--accent-emerald)"
-                ></div>
-                <div class="chart-bar" style="height: 70%"></div>
-                <div class="chart-bar" style="height: 40%"></div>
-                <div
-                  class="chart-bar"
-                  style="height: 25%; background: var(--accent-rose)"
-                ></div>
-              </div>
-            </div>
-            <div class="content-card">
-              <div class="section-title">Admin Controls</div>
-              <div style="display: flex; flex-direction: column; gap: 12px">
-                <button
-                  style="
-                    padding: 12px;
-                    background: var(--primary-brand);
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    font-size: 0.7rem;
-                    cursor: pointer;
-                  "
-                >
-                  Modify Driver Rest-Triggers
-                </button>
-                <button
-                  style="
-                    padding: 12px;
-                    background: #1e293b;
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    font-size: 0.7rem;
-                    cursor: pointer;
-                  "
-                >
-                  View ESG Audit Log
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <script>
-      function switchPerspective(role) {
-        // Toggle buttons
-        document
-          .getElementById("btn-gov")
-          .classList.toggle("active", role === "gov");
-        document
-          .getElementById("btn-org")
-          .classList.toggle("active", role === "org");
-
-        // Toggle nav groups
-        document.getElementById("nav-gov").style.display =
-          role === "gov" ? "flex" : "none";
-        document.getElementById("nav-org").style.display =
-          role === "org" ? "flex" : "none";
-
-        // Toggle views
-        document
-          .getElementById("perspective-gov")
-          .classList.toggle("active", role === "gov");
-        document
-          .getElementById("perspective-org")
-          .classList.toggle("active", role === "org");
-
-        // Update titles/clearance
-        const title = document.getElementById("view-title");
-        const subtitle = document.getElementById("view-subtitle");
-        const clearance = document.getElementById("clearance-text");
-
-        if (role === "gov") {
-          title.innerText = "National Regulatory Dashboard";
-          subtitle.innerText = "Ministry of Health & Labor Oversight";
-          clearance.innerText = "Level 4: Fed. Regulator";
-        } else {
-          title.innerText = "Platform Operations Center";
-          subtitle.innerText = "Internal Workforce Sustainability & ESG";
-          clearance.innerText = "Level 2: Org. Administrator";
-        }
-      }
-    </script>
+        Design Strategy: Algorithmic Health & Portable Benefits
+      </p>
+    </div>
   </body>
 </html>
