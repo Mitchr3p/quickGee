@@ -3,24 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Future of Health Slide Journey</title>
+    <title>Future of Health MVP | Health Finance Initiative</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --bg-slate: #f8fafc;
+        --bg-main: #f8fafc;
+        --sidebar-bg: #1e293b;
+        --card-bg: #ffffff;
         --text-main: #0f172a;
         --text-muted: #64748b;
-        --primary-blue: #2563eb;
-        --accent-red: #ef4444;
-        --accent-green: #10b981;
-        --border-slate: #e2e8f0;
-        --warning-amber: #f59e0b;
-        --bg-card: #ffffff;
+        --primary-brand: #2563eb;
+        --accent-red: #dc2626;
+        --accent-green: #059669;
+        --accent-purple: #7c3aed;
+        --border-color: #e2e8f0;
+        --sidebar-width: 280px;
       }
 
       * {
@@ -31,54 +33,170 @@
 
       body {
         font-family: "Inter", sans-serif;
-        background-color: white;
+        background-color: var(--bg-main);
         color: var(--text-main);
-        line-height: 1.5;
-        padding: 20px 40px;
-      }
-
-      /* Navigation */
-      nav {
         display: flex;
-        gap: 10px;
-        margin-bottom: 30px;
-        padding: 10px;
-        background: var(--bg-slate);
-        border-radius: 12px;
-        border: 1px solid var(--border-slate);
-        overflow-x: auto;
+        height: 100vh;
+        overflow: hidden;
       }
 
-      nav button {
-        padding: 8px 16px;
-        border: none;
-        background: none;
+      /* Sidebar Navigation */
+      aside {
+        width: var(--sidebar-width);
+        background: var(--sidebar-bg);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        padding: 24px;
+        flex-shrink: 0;
+      }
+
+      .logo-area {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 40px;
+        padding: 0 8px;
+      }
+
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        background: var(--primary-brand);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+
+      .nav-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .nav-item {
+        padding: 12px 16px;
+        border-radius: 10px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #94a3b8;
+        font-weight: 500;
+        transition: all 0.2s;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .nav-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+      }
+
+      .nav-item.active {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border-left: 4px solid var(--primary-brand);
+      }
+
+      .nav-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        color: #475569;
+        margin: 28px 0 8px 16px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+
+      /* Main Content Area */
+      main {
+        flex-grow: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background: white;
+        height: 72px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        flex-shrink: 0;
+      }
+
+      .badge {
+        background: #f1f5f9;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
         font-weight: 600;
         color: var(--text-muted);
-        border-radius: 8px;
-        white-space: nowrap;
-        transition: all 0.2s;
       }
 
-      nav button.active {
+      .dashboard-content {
+        padding: 40px;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      /* KPI Cards */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      .stat-card {
         background: white;
-        color: var(--primary-blue);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        padding: 24px;
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
       }
 
-      .slide {
-        display: none;
-        animation: fadeIn 0.4s ease-out;
-      }
-      .slide.active {
+      .stat-title {
+        color: var(--text-muted);
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
         display: block;
       }
 
-      @keyframes fadeIn {
+      .stat-value {
+        font-size: 1.75rem;
+        font-weight: 800;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .stat-subtitle {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      /* Sections */
+      .section {
+        display: none;
+        animation: slideUp 0.4s ease-out;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      @keyframes slideUp {
         from {
           opacity: 0;
-          transform: translateY(10px);
+          transform: translateY(20px);
         }
         to {
           opacity: 1;
@@ -86,554 +204,428 @@
         }
       }
 
-      header {
-        border-bottom: 2px solid var(--border-slate);
-        padding-bottom: 15px;
-        margin-bottom: 30px;
-      }
-      h1 {
-        font-size: 2rem;
-        font-weight: 800;
-        letter-spacing: -0.025em;
-      }
-      .highlight {
-        color: var(--primary-blue);
-      }
-      .subtitle {
-        font-size: 1rem;
-        color: var(--text-muted);
-        font-weight: 500;
-      }
-
-      /* Grid Systems */
-      .grid-3 {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 20px;
-        margin-bottom: 30px;
-      }
-
-      /* Card Styling */
-      .card {
-        background: #fff;
-        border: 2px solid var(--border-slate);
-        border-radius: 20px;
-        padding: 24px;
-        position: relative;
-        transition: all 0.2s;
-      }
-
-      .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.05);
-      }
-
-      .crisis-card:hover {
-        border-color: var(--accent-red);
-      }
-      .tech-card:hover {
-        border-color: var(--primary-blue);
-      }
-      .roi-card:hover {
-        border-color: var(--accent-green);
-      }
-
-      .card-icon {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-        display: block;
-      }
-      .card-title {
-        font-weight: 800;
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-        display: block;
-      }
-      .card-list {
-        list-style: none;
-        font-size: 0.85rem;
-        color: var(--text-muted);
-      }
-      .card-list li {
-        margin-bottom: 10px;
-        padding-left: 15px;
-        position: relative;
-      }
-      .card-list li::before {
-        content: "•";
-        position: absolute;
-        left: 0;
-        font-weight: bold;
-      }
-
-      .crisis-title {
-        color: var(--accent-red);
-      }
-      .tech-title {
-        color: var(--primary-blue);
-      }
-      .roi-title {
-        color: var(--accent-green);
-      }
-
-      .crisis-list li::before {
-        color: var(--accent-red);
-      }
-      .tech-list li::before {
-        color: var(--primary-blue);
-      }
-      .roi-list li::before {
-        color: var(--accent-green);
-      }
-
-      /* Impact/Info Boxes */
-      .info-box {
-        border-radius: 15px;
-        padding: 20px;
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-      }
-
-      .crisis-box {
-        background: #fef2f2;
-        border: 1px dashed var(--accent-red);
-      }
-      .tech-box {
-        background: #eff6ff;
-        border: 1px dashed var(--primary-blue);
-      }
-      .roi-box {
-        background: #f0fdf4;
-        border: 1px dashed var(--accent-green);
-      }
-
-      .stat-circle {
-        width: 70px;
-        height: 70px;
+      .content-card {
         background: white;
-        border-radius: 50%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        border: 3px solid;
+        border-radius: 24px;
+        border: 1px solid var(--border-color);
+        padding: 40px;
+        margin-bottom: 24px;
       }
 
-      .stat-value {
-        font-weight: 900;
-        font-size: 1.2rem;
-        line-height: 1;
+      /* Research Visuals */
+      .stress-inflation-map {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 24px;
       }
-      .stat-label {
-        font-size: 0.6rem;
-        text-transform: uppercase;
-        font-weight: 700;
+
+      .risk-item {
+        padding: 20px;
+        border-radius: 16px;
+        background: #fdf2f2;
+        border: 1px solid #fee2e2;
+      }
+
+      .risk-item.blue {
+        background: #eff6ff;
+        border-color: #dbeafe;
+      }
+      .risk-item.purple {
+        background: #f5f3ff;
+        border-color: #ede9fe;
+      }
+
+      .risk-title {
+        font-weight: 800;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        display: block;
+      }
+      .risk-text {
+        font-size: 0.85rem;
+        line-height: 1.5;
         color: var(--text-muted);
       }
 
-      /* Tech Workflow Diagram */
-      .workflow {
+      /* Model Innovation UI */
+      .innovation-flow {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: var(--bg-slate);
-        padding: 30px;
-        border-radius: 20px;
-        margin-top: 20px;
-      }
-      .wf-step {
-        background: white;
-        padding: 15px;
-        border-radius: 12px;
-        text-align: center;
-        border: 1px solid var(--border-slate);
-        width: 180px;
-      }
-      .wf-arrow {
-        color: var(--primary-blue);
-        font-weight: 800;
+        background: #f1f5f9;
+        padding: 40px;
+        border-radius: 24px;
+        margin-top: 24px;
       }
 
-      /* Bar Chart ROI */
-      .chart-container {
+      .flow-box {
+        background: white;
+        padding: 24px;
+        border-radius: 16px;
+        width: 200px;
+        text-align: center;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        border: 2px solid transparent;
+      }
+
+      .flow-box.active {
+        border-color: var(--primary-brand);
+      }
+      .arrow {
+        font-size: 1.5rem;
+        color: #cbd5e1;
+      }
+
+      /* Stakeholder Table */
+      table {
+        width: 100%;
+        border-collapse: collapse;
         margin-top: 20px;
       }
-      .bar-row {
-        margin-bottom: 15px;
+
+      th {
+        text-align: left;
+        padding: 12px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        border-bottom: 2px solid var(--bg-main);
       }
-      .bar-label {
+
+      td {
+        padding: 16px 12px;
+        border-bottom: 1px solid var(--bg-main);
+        font-size: 0.9rem;
+      }
+
+      .tag {
+        padding: 4px 10px;
+        border-radius: 6px;
         font-size: 0.75rem;
         font-weight: 600;
-        margin-bottom: 5px;
-        display: block;
       }
-      .bar-bg {
-        background: var(--border-slate);
-        height: 12px;
-        border-radius: 6px;
-        width: 100%;
-        overflow: hidden;
+      .tag-reactive {
+        background: #fee2e2;
+        color: #991b1b;
       }
-      .bar-fill {
-        height: 100%;
-        border-radius: 6px;
+      .tag-volume {
+        background: #e0f2fe;
+        color: #075985;
       }
-
-      footer {
-        margin-top: 40px;
-        text-align: center;
-        color: var(--text-muted);
-        font-style: italic;
-        font-size: 0.85rem;
-        border-top: 1px solid var(--border-slate);
-        padding-top: 20px;
+      .tag-care {
+        background: #dcfce7;
+        color: #166534;
       }
     </style>
   </head>
   <body>
-    <nav class="main-navbar">
-      <div class="nav-links">
-        <a href="index.html">Overview</a>
-        <a href="firstStage.html">Stage 1</a>
-        <a href="secondStage.html">Stage 2(final)</a>
-        <!-- <a href="#segment3">Impact</a> -->
-      </div>
-    </nav>
-    <nav>
-      <button onclick="showSlide('overview')" id="btn-overview" class="active">
-        0. Overview
-      </button>
-      <button onclick="showSlide('segment1')" id="btn-segment1">
-        1. The Crisis Zone
-      </button>
-      <button onclick="showSlide('segment2')" id="btn-segment2">
-        2. The API Hub
-      </button>
-      <button onclick="showSlide('segment3')" id="btn-segment3">
-        3. Future Value
-      </button>
-    </nav>
-
-    <!-- SLIDE 0: OVERVIEW -->
-    <div id="overview" class="slide active">
-      <header>
-        <h1>
-          Future of Health: <span class="highlight">Ecosystem Overview</span>
-        </h1>
-        <p class="subtitle">
-          Moving from Algorithmic Dehumanization to Systemic Rest
-        </p>
-      </header>
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 20px;
-          background: var(--bg-slate);
-          padding: 40px;
-          border-radius: 30px;
-        "
-      >
-        <div style="text-align: center; flex: 1">
-          <span style="font-size: 3rem">⛓️</span>
-          <h3 style="margin-top: 10px">The Problem</h3>
-          <p style="font-size: 0.8rem; color: var(--text-muted)">
-            Algorithmic Tax & Exhaustion
-          </p>
+    <!-- Navigation -->
+    <aside>
+      <div class="logo-area">
+        <div class="logo-icon">🇳🇬</div>
+        <div>
+          <h2 style="font-size: 1rem; letter-spacing: -0.01em; line-height: 1">
+            FutureHealth
+          </h2>
+          <span style="font-size: 0.65rem; color: #94a3b8; font-weight: 600"
+            >Health Finance Initiative</span
+          >
         </div>
-        <div style="font-size: 2rem; color: var(--border-slate)">➜</div>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label">Executive View</div>
+        <a
+          href="#"
+          class="nav-item active"
+          onclick="switchView('research', this)"
+        >
+          <span>📋</span> Research Summary
+        </a>
+        <a href="#" class="nav-item" onclick="switchView('stakeholders', this)">
+          <span>👥</span> Stakeholder Map
+        </a>
+        <a href="#" class="nav-item" onclick="switchView('innovation', this)">
+          <span>💡</span> Service Innovation
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label">Economic Context</div>
         <div
           style="
-            text-align: center;
-            flex: 1;
-            background: white;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin: 0 8px;
           "
         >
-          <span style="font-size: 3rem">🔌</span>
-          <h3 style="margin-top: 10px; color: var(--primary-blue)">
-            The Solution
-          </h3>
-          <p style="font-size: 0.8rem; color: var(--text-muted)">
-            Portable Benefits API Hub
+          <p style="font-size: 0.65rem; color: #94a3b8; margin-bottom: 4px">
+            MISERY INDEX (2025)
           </p>
-        </div>
-        <div style="font-size: 2rem; color: var(--border-slate)">➜</div>
-        <div style="text-align: center; flex: 1">
-          <span style="font-size: 3rem">📈</span>
-          <h3 style="margin-top: 10px">The Result</h3>
-          <p style="font-size: 0.8rem; color: var(--text-muted)">
-            National Health Productivity
+          <p style="font-size: 1.2rem; font-weight: 800; color: #ef4444">
+            38.3%
+          </p>
+          <p style="font-size: 0.6rem; color: #64748b; margin-top: 4px">
+            Inflation + Unemployment
           </p>
         </div>
       </div>
-    </div>
 
-    <!-- SLIDE 1: THE CRISIS ZONE -->
-    <div id="segment1" class="slide">
-      <header>
-        <h1>
-          Segment 1:
-          <span style="color: var(--accent-red)">The Algorithmic Crisis</span>
-        </h1>
-        <p class="subtitle">
-          Why current gig models are "taxing" the Nigerian youth population
-        </p>
-      </header>
-      <div class="grid-3">
-        <div class="card crisis-card">
-          <span class="card-icon">📱</span>
-          <span class="card-title crisis-title">Incentive Dehumanization</span>
-          <ul class="card-list crisis-list">
-            <li>
-              <strong>Night Surcharge:</strong> UI traps youth into 2 AM labor
-              for ₦50k survival.
-            </li>
-            <li>
-              <strong>Rating Anxiety:</strong> Algorithms ignore human
-              exhaustion limits.
-            </li>
-            <li>
-              <strong>Naira Devaluation:</strong> Double work hours needed for
-              the same value.
-            </li>
-          </ul>
-        </div>
-        <div class="card crisis-card">
-          <span class="card-icon">⚡</span>
-          <span class="card-title crisis-title">Infrastructure Friction</span>
-          <ul class="card-list crisis-list">
-            <li>
-              <strong>Imported Models:</strong> US apps fail to factor in Lagos
-              traffic gridlock.
-            </li>
-            <li>
-              <strong>Power Shortage:</strong> "Nepa Anxiety" spikes cortisol
-              during work hours.
-            </li>
-            <li>
-              <strong>Friction Factor:</strong> Code creates hazards when
-              divorced from local reality.
-            </li>
-          </ul>
-        </div>
-        <div class="card crisis-card">
-          <span class="card-icon">🚭</span>
-          <span class="card-title crisis-title">The Biological Tax</span>
-          <ul class="card-list crisis-list">
-            <li>
-              <strong>Isolation:</strong> No "water-cooler" communal support
-              systems.
-            </li>
-            <li>
-              <strong>NHIA Gap:</strong> 80% of workers are legally invisible to
-              insurance.
-            </li>
-            <li>
-              <strong>Health Decline:</strong> Permanent cortisol spikes damage
-              neurological health.
-            </li>
-          </ul>
-        </div>
+      <div
+        style="
+          margin-top: auto;
+          padding: 16px;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+        "
+      >
+        <p style="font-size: 0.7rem; color: #64748b">Board Presentation MVP</p>
       </div>
-      <div class="info-box crisis-box">
-        <div class="stat-circle" style="border-color: var(--accent-red)">
-          <span class="stat-value" style="color: var(--accent-red)">15</span>
-          <span class="stat-label">Cigs</span>
-        </div>
-        <div>
-          <h4 style="font-weight: 800; color: var(--accent-red)">
-            The Isolation Equivalence
-          </h4>
-          <p style="font-size: 0.85rem">
-            "Isolation in the gig economy is as chronic as smoking 15 cigarettes
-            daily."
-          </p>
-        </div>
-      </div>
-    </div>
+    </aside>
 
-    <!-- SLIDE 2: THE API ARCHITECTURE -->
-    <div id="segment2" class="slide">
+    <!-- Main Content -->
+    <main>
       <header>
-        <h1>
-          Segment 2: <span class="highlight">The API Infrastructure</span>
-        </h1>
-        <p class="subtitle">
-          Building the "BVN of Health" for portable worker benefits
-        </p>
+        <div class="badge">Board MVP Phase 1: Lagos Pilot</div>
+        <div style="display: flex; align-items: center; gap: 20px">
+          <button
+            style="
+              background: var(--primary-brand);
+              color: white;
+              border: none;
+              padding: 8px 16px;
+              border-radius: 8px;
+              font-weight: 600;
+              font-size: 0.85rem;
+              cursor: pointer;
+            "
+          >
+            Export Report
+          </button>
+        </div>
       </header>
-      <div class="grid-3">
-        <div class="card tech-card">
-          <span class="card-icon">🪪</span>
-          <span class="card-title tech-title">Portable ID Hub</span>
-          <p style="font-size: 0.85rem; color: var(--text-muted)">
-            A single "Health-BVN" that follows the worker across Uber, Bolt,
-            Jumia, and Upwork.
-          </p>
-        </div>
-        <div class="card tech-card">
-          <span class="card-icon">📊</span>
-          <span class="card-title tech-title">Aggregated Credits</span>
-          <p style="font-size: 0.85rem; color: var(--text-muted)">
-            Micro-contributions from every ride or delivery pool into a unified
-            health wallet.
-          </p>
-        </div>
-        <div class="card tech-card">
-          <span class="card-icon">💤</span>
-          <span class="card-title tech-title">Algorithmic Rest</span>
-          <p style="font-size: 0.85rem; color: var(--text-muted)">
-            Auto-lockout triggers 8 hours of rest with a "Rest Bonus" payout to
-            cover lost time.
-          </p>
-        </div>
-      </div>
-      <div class="workflow">
-        <div class="wf-step">
-          <strong>1. Activity Log</strong><br /><small
-            >App detects 10hrs work</small
-          >
-        </div>
-        <div class="wf-arrow">➜</div>
-        <div class="wf-step">
-          <strong>2. API Trigger</strong><br /><small>Unlock Rest Wallet</small>
-        </div>
-        <div class="wf-arrow">➜</div>
-        <div class="wf-step">
-          <strong>3. Rest Bonus</strong><br /><small
-            >₦15,000 paid for sleep</small
-          >
-        </div>
-        <div class="wf-arrow">➜</div>
-        <div class="wf-step">
-          <strong>4. Re-entry</strong><br /><small>Return refreshed</small>
-        </div>
-      </div>
-      <div class="info-box tech-box">
-        <div class="stat-circle" style="border-color: var(--primary-blue)">
-          <span class="stat-value" style="color: var(--primary-blue)"
-            >100%</span
-          >
-          <span class="stat-label">Port.</span>
-        </div>
-        <div>
-          <h4 style="font-weight: 800; color: var(--primary-blue)">
-            Interoperable Benefits
-          </h4>
-          <p style="font-size: 0.85rem">
-            Health security that belongs to the human, not the company platform.
-          </p>
-        </div>
-      </div>
-    </div>
 
-    <!-- SLIDE 3: ECONOMIC ROI -->
-    <div id="segment3" class="slide">
-      <header>
-        <h1>
-          Segment 3:
-          <span style="color: var(--accent-green)">Sustainable ROI</span>
-        </h1>
-        <p class="subtitle">
-          Treating Nigerian youth as a national asset, not a commodity
-        </p>
-      </header>
-      <div class="grid-3">
-        <div class="card roi-card">
-          <span class="card-icon">🛡️</span>
-          <span class="card-title roi-title">Public Safety</span>
-          <p style="font-size: 0.85rem; color: var(--text-muted)">
-            60% reduction in road accidents by eliminating "exhaustion-driving"
-            incentives.
-          </p>
-        </div>
-        <div class="card roi-card">
-          <span class="card-icon">👑</span>
-          <span class="card-title roi-title">Brand Retention</span>
-          <p style="font-size: 0.85rem; color: var(--text-muted)">
-            Platforms with health-support see 40% higher NPS and lower driver
-            churn.
-          </p>
-        </div>
-        <div class="card roi-card">
-          <span class="card-icon">🇳🇬</span>
-          <span class="card-title roi-title">National Security</span>
-          <p style="font-size: 0.85rem; color: var(--text-muted)">
-            Protecting the mental health of 80% of our workforce from systemic
-            burnout.
-          </p>
-        </div>
-      </div>
-      <div class="chart-container">
-        <div class="bar-row">
-          <span class="bar-label">Public Health Savings (Projected)</span>
-          <div class="bar-bg">
-            <div
-              class="bar-fill"
-              style="width: 85%; background: var(--accent-green)"
-            ></div>
+      <div class="dashboard-content">
+        <!-- The "Human" Metrics -->
+        <div class="stats-grid">
+          <div
+            class="stat-card"
+            style="border-left: 4px solid var(--accent-red)"
+          >
+            <span class="stat-title">BIOLOGICAL TAX</span>
+            <span class="stat-value">15</span>
+            <span class="stat-subtitle">Equiv. Cigarettes/Day</span>
+          </div>
+          <div
+            class="stat-card"
+            style="border-left: 4px solid var(--accent-purple)"
+          >
+            <span class="stat-title">RATING ANXIETY</span>
+            <span class="stat-value">65%</span>
+            <span class="stat-subtitle">Chronic Anxiety Rate</span>
+          </div>
+          <div
+            class="stat-card"
+            style="border-left: 4px solid var(--accent-green)"
+          >
+            <span class="stat-title">DIGITAL FATIGUE</span>
+            <span class="stat-value">Permanent</span>
+            <span class="stat-subtitle">Cognitive Exhaustion</span>
+          </div>
+          <div
+            class="stat-card"
+            style="border-left: 4px solid var(--primary-brand)"
+          >
+            <span class="stat-title">MULTI-GIGGING</span>
+            <span class="stat-value">3.2</span>
+            <span class="stat-subtitle">Avg. Apps per Worker</span>
           </div>
         </div>
-        <div class="bar-row">
-          <span class="bar-label">Worker Lifetime Productivity</span>
-          <div class="bar-bg">
+
+        <!-- Section: Research Summary -->
+        <div id="research" class="section active">
+          <div class="content-card">
+            <h1 style="margin-bottom: 12px; font-size: 1.5rem">
+              Invisible Architecture: Gig Health in Nigeria
+            </h1>
+            <p
+              style="
+                color: var(--text-muted);
+                max-width: 800px;
+                line-height: 1.6;
+              "
+            >
+              Health is now a "digital byproduct." For 12.2 million workers,
+              algorithms are the primary social determinants of health, setting
+              sleep cycles and stress levels through UX design.
+            </p>
+
+            <div class="stress-inflation-map">
+              <div class="risk-item">
+                <span class="risk-title">The Stress-Inflation Loop</span>
+                <p class="risk-text">
+                  As Naira devalues, screen time must increase to maintain
+                  purchasing power, leading to permanent cortisol spikes.
+                </p>
+              </div>
+              <div class="risk-item blue">
+                <span class="risk-title">Triple Fatigue</span>
+                <p class="risk-text">
+                  The mental load of the task + algorithmic surveillance +
+                  physical anxiety of power/data fluctuations.
+                </p>
+              </div>
+              <div class="risk-item purple">
+                <span class="risk-title">Atomization of Labor</span>
+                <p class="risk-text">
+                  Shift from communal African work structures to solitary,
+                  solitary digital isolation (equivalent to chronic smoking).
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Stakeholder Map -->
+        <div id="stakeholders" class="section">
+          <div class="content-card">
+            <h2>Stakeholder Incentive Alignment</h2>
+            <p style="color: var(--text-muted); margin-bottom: 24px">
+              Identifying misaligned priorities across the ecosystem.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Stakeholder</th>
+                  <th>Primary Incentive</th>
+                  <th>Health Influence</th>
+                  <th>Behavior</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Gig Worker</b></td>
+                  <td>Financial Liquidity</td>
+                  <td>Transactional</td>
+                  <td><span class="tag tag-reactive">Reactive Care</span></td>
+                </tr>
+                <tr>
+                  <td><b>Platforms</b> (Uber/Upwork)</td>
+                  <td>Efficiency & GMV</td>
+                  <td>Shadow Managers</td>
+                  <td><span class="tag tag-volume">Volume Driven</span></td>
+                </tr>
+                <tr>
+                  <td><b>NHIA / Gov</b></td>
+                  <td>Population Health</td>
+                  <td>Regulatory</td>
+                  <td><span class="tag tag-volume">Legacy Model</span></td>
+                </tr>
+                <tr>
+                  <td><b>Peer Networks</b></td>
+                  <td>Social Capital</td>
+                  <td>Psychological Aid</td>
+                  <td><span class="tag tag-care">True Caregivers</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section: Innovation -->
+        <div id="innovation" class="section">
+          <div class="content-card">
+            <h2>Service Design Strategy: Human-Augmentation</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px">
+              Transitioning from extractive algorithms to care-centric systems.
+            </p>
+
+            <div class="innovation-flow">
+              <div class="flow-box">
+                <p
+                  style="
+                    font-size: 0.7rem;
+                    font-weight: 800;
+                    color: var(--primary-brand);
+                  "
+                >
+                  POLICY
+                </p>
+                <h4 style="margin: 8px 0">Portable Benefits</h4>
+                <p style="font-size: 0.75rem; color: var(--text-muted)">
+                  Micro-deductions from every trip/gig for NHIA.
+                </p>
+              </div>
+              <div class="arrow">→</div>
+              <div class="flow-box active">
+                <p
+                  style="
+                    font-size: 0.7rem;
+                    font-weight: 800;
+                    color: var(--primary-brand);
+                  "
+                >
+                  UX DESIGN
+                </p>
+                <h4 style="margin: 8px 0">The Rest Bonus</h4>
+                <p style="font-size: 0.75rem; color: var(--text-muted)">
+                  Financial compensation for mandated sleep gaps.
+                </p>
+              </div>
+              <div class="arrow">→</div>
+              <div class="flow-box">
+                <p
+                  style="
+                    font-size: 0.7rem;
+                    font-weight: 800;
+                    color: var(--primary-brand);
+                  "
+                >
+                  OUTCOME
+                </p>
+                <h4 style="margin: 8px 0">Cognitive Justice</h4>
+                <p style="font-size: 0.75rem; color: var(--text-muted)">
+                  Protecting mental bandwidth as a national resource.
+                </p>
+              </div>
+            </div>
+
             <div
-              class="bar-fill"
-              style="width: 70%; background: var(--primary-blue)"
-            ></div>
+              style="
+                margin-top: 32px;
+                background: #fffbeb;
+                border: 1px solid #fef3c7;
+                padding: 20px;
+                border-radius: 16px;
+              "
+            >
+              <h4 style="color: #92400e; margin-bottom: 8px">
+                Hypothesis B: The Western Logic Mismatch
+              </h4>
+              <p style="font-size: 0.9rem; color: #92400e">
+                Algorithms penalize Nigerian workers for "inefficiencies"
+                (traffic, power) beyond their control, leading to
+                <b>learned helplessness</b>. Our MVP must bridge this friction
+                gap.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="info-box roi-box">
-        <div class="stat-circle" style="border-color: var(--accent-green)">
-          <span class="stat-value" style="color: var(--accent-green)">ROI</span>
-          <span class="stat-label">Social</span>
-        </div>
-        <div>
-          <h4 style="font-weight: 800; color: var(--accent-green)">
-            The Multiplier Effect
-          </h4>
-          <p style="font-size: 0.85rem">
-            For every ₦1 spent on systemic rest, the national economy gains ₦4
-            in reduced health burden.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <footer id="footer-text">
-      "Health is no longer built with wards, but by lines of code." —
-      Presentation Segment 1
-    </footer>
+    </main>
 
     <script>
-      const quotes = {
-        overview: "Moving from Algorithmic Dehumanization to Systemic Rest",
-        segment1: "Health is no longer built with wards, but by lines of code.",
-        segment2:
-          "The API is the new doctor: Prescribing rest through infrastructure.",
-        segment3:
-          "A rested workforce is a national asset; a burnt-out one is a liability.",
-      };
-
-      function showSlide(slideId) {
+      function switchView(viewId, element) {
         document
-          .querySelectorAll(".slide")
+          .querySelectorAll(".section")
           .forEach((s) => s.classList.remove("active"));
+        document.getElementById(viewId).classList.add("active");
         document
-          .querySelectorAll("nav button")
-          .forEach((b) => b.classList.remove("active"));
-        document.getElementById(slideId).classList.add("active");
-        document.getElementById("btn-" + slideId).classList.add("active");
-        document.getElementById("footer-text").innerText =
-          `"${quotes[slideId]}"`;
+          .querySelectorAll(".nav-item")
+          .forEach((n) => n.classList.remove("active"));
+        element.classList.add("active");
       }
     </script>
   </body>
