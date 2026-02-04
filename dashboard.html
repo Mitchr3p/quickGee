@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FutureHealth Exec | National Health-Tech Strategy</title>
+    <title>FutureHealth | Dual-Perspective Control Tower</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,7 +17,7 @@
         --card-bg: #0f172a;
         --text-main: #f1f5f9;
         --text-muted: #64748b;
-        --primary-brand: #6366f1; /* Indigo for a more executive feel */
+        --primary-brand: #6366f1;
         --accent-cyan: #06b6d4;
         --accent-emerald: #10b981;
         --accent-rose: #f43f5e;
@@ -56,7 +56,7 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         padding: 0 8px;
       }
 
@@ -74,6 +74,34 @@
         justify-content: center;
         font-weight: 800;
         font-size: 1.2rem;
+      }
+
+      /* Role Switcher */
+      .role-switcher {
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 4px;
+        display: flex;
+        margin-bottom: 32px;
+      }
+
+      .role-btn {
+        flex: 1;
+        padding: 8px;
+        border-radius: 8px;
+        border: none;
+        background: transparent;
+        color: #94a3b8;
+        font-size: 0.7rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+      }
+
+      .role-btn.active {
+        background: var(--primary-brand);
+        color: white;
       }
 
       .nav-group {
@@ -139,16 +167,6 @@
         z-index: 10;
       }
 
-      .header-search {
-        background: #1e293b;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 10px;
-        color: white;
-        width: 300px;
-        font-size: 0.85rem;
-      }
-
       .dashboard-content {
         padding: 40px;
         max-width: 1400px;
@@ -156,7 +174,7 @@
         width: 100%;
       }
 
-      /* Executive KPI Row */
+      /* Grid Layouts */
       .exec-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -170,11 +188,6 @@
         border-radius: 20px;
         border: 1px solid var(--border-color);
         transition: transform 0.2s;
-      }
-
-      .exec-card:hover {
-        transform: translateY(-2px);
-        border-color: var(--primary-brand);
       }
 
       .exec-title {
@@ -193,13 +206,6 @@
         letter-spacing: -0.02em;
       }
 
-      .exec-trend {
-        font-size: 0.75rem;
-        margin-top: 8px;
-        font-weight: 600;
-      }
-
-      /* Data Section Components */
       .grid-layout {
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -223,51 +229,36 @@
         gap: 12px;
       }
 
-      /* Research Correlation Chart (CSS Simulation) */
+      /* Charts */
       .chart-container {
-        height: 200px;
+        height: 180px;
         display: flex;
         align-items: flex-end;
         gap: 12px;
-        padding-top: 20px;
+        margin-top: 20px;
       }
 
       .chart-bar {
         flex: 1;
-        background: linear-gradient(
-          to top,
-          var(--primary-brand),
-          var(--accent-cyan)
-        );
-        border-radius: 6px 6px 0 0;
-        position: relative;
-        min-height: 20px;
+        background: var(--primary-brand);
+        border-radius: 4px 4px 0 0;
+        opacity: 0.8;
       }
 
-      .chart-bar:hover::after {
-        content: attr(data-value);
-        position: absolute;
-        top: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 0.7rem;
-        color: var(--accent-cyan);
-      }
-
-      /* View Sections */
-      .view {
+      /* View Handling */
+      .perspective-view {
         display: none;
-        animation: slideUp 0.5s ease-out;
       }
 
-      .view.active {
+      .perspective-view.active {
         display: block;
+        animation: fadeIn 0.4s ease-out;
       }
 
-      @keyframes slideUp {
+      @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(10px);
+          transform: translateY(5px);
         }
         to {
           opacity: 1;
@@ -282,14 +273,17 @@
         font-weight: 700;
         text-transform: uppercase;
       }
-
-      .tag-indigo {
-        background: rgba(99, 102, 241, 0.1);
-        color: var(--primary-brand);
+      .tag-emerald {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--accent-emerald);
       }
       .tag-rose {
         background: rgba(244, 63, 94, 0.1);
         color: var(--accent-rose);
+      }
+      .tag-cyan {
+        background: rgba(6, 182, 212, 0.1);
+        color: var(--accent-cyan);
       }
     </style>
   </head>
@@ -299,9 +293,7 @@
       <div class="logo-area">
         <div class="logo-icon">H</div>
         <div>
-          <h2 style="font-size: 0.95rem; letter-spacing: -0.01em">
-            ExecControl
-          </h2>
+          <h2 style="font-size: 0.95rem">HealthFlow</h2>
           <span
             style="
               font-size: 0.6rem;
@@ -309,40 +301,44 @@
               font-weight: 700;
               text-transform: uppercase;
             "
-            >Strategic Health Foresight</span
+            >Governance Portal</span
           >
         </div>
       </div>
 
-      <div class="nav-group">
-        <div class="nav-label">Core Intelligence</div>
-        <a
-          href="#"
-          class="nav-item active"
-          onclick="switchView('national-pulse', this)"
+      <div class="role-switcher">
+        <button
+          id="btn-gov"
+          class="role-btn active"
+          onclick="switchPerspective('gov')"
         >
-          <span>🌐</span> National Pulse
-        </a>
-        <a
-          href="#"
-          class="nav-item"
-          onclick="switchView('cognitive-justice', this)"
+          Regulator
+        </button>
+        <button
+          id="btn-org"
+          class="role-btn"
+          onclick="switchPerspective('org')"
         >
-          <span>🧠</span> Cognitive Justice
-        </a>
-        <a
-          href="#"
-          class="nav-item"
-          onclick="switchView('revenue-models', this)"
-        >
-          <span>💰</span> Revenue & Benefits
-        </a>
+          Platform Admin
+        </button>
       </div>
 
-      <div class="nav-group">
-        <div class="nav-label">Policy Sandbox</div>
-        <a href="#" class="nav-item"> <span>⚖️</span> Regulatory Sliders </a>
-        <a href="#" class="nav-item"> <span>📉</span> Stress-Inflation Loop </a>
+      <div id="nav-gov" class="nav-group">
+        <div class="nav-label">National Policy</div>
+        <a href="#" class="nav-item active"
+          ><span>🏛️</span> Compliance Matrix</a
+        >
+        <a href="#" class="nav-item"><span>📉</span> Labor Health Tax</a>
+        <a href="#" class="nav-item"><span>⚖️</span> Benefit Portability</a>
+      </div>
+
+      <div id="nav-org" class="nav-group" style="display: none">
+        <div class="nav-label">Fleet Intelligence</div>
+        <a href="#" class="nav-item active"
+          ><span>🚀</span> Retention Metrics</a
+        >
+        <a href="#" class="nav-item"><span>⚡</span> Productivity Loss</a>
+        <a href="#" class="nav-item"><span>🌱</span> ESG Sustainability</a>
       </div>
 
       <div
@@ -354,7 +350,7 @@
         "
       >
         <p style="font-size: 0.6rem; color: #64748b; margin-bottom: 8px">
-          DATA FRESHNESS
+          SECURITY CLEARANCE
         </p>
         <div style="display: flex; align-items: center; gap: 8px">
           <div
@@ -365,330 +361,197 @@
               border-radius: 50%;
             "
           ></div>
-          <span style="font-size: 0.7rem; font-weight: 600"
-            >Real-time Telemetry Active</span
+          <span style="font-size: 0.7rem; font-weight: 600" id="clearance-text"
+            >Level 4: Fed. Regulator</span
           >
         </div>
       </div>
     </aside>
 
-    <!-- Content -->
     <main>
       <header>
         <div>
-          <h1 style="font-size: 1.25rem; font-weight: 700">
-            Executive Dashboard
+          <h1 id="view-title" style="font-size: 1.25rem; font-weight: 700">
+            National Regulatory Dashboard
           </h1>
-          <p style="font-size: 0.75rem; color: var(--text-muted)">
-            Macro Health Dynamics: Gig-Economy Sector
+          <p
+            id="view-subtitle"
+            style="font-size: 0.75rem; color: var(--text-muted)"
+          >
+            Ministry of Health & Labor Oversight
           </p>
         </div>
-        <input
-          type="text"
-          class="header-search"
-          placeholder="Search research metrics..."
-        />
       </header>
 
       <div class="dashboard-content">
-        <!-- Strategic KPI Row -->
-        <div class="exec-grid">
-          <div class="exec-card">
-            <div class="exec-title">
-              National Gig Population
-              <span class="tag tag-indigo">Sector A</span>
+        <!-- PERSPECTIVE: GOVERNMENT REGULATOR -->
+        <div id="perspective-gov" class="perspective-view active">
+          <div class="exec-grid">
+            <div class="exec-card">
+              <div class="exec-title">
+                Active Gig Sector <span class="tag tag-cyan">Population</span>
+              </div>
+              <div class="exec-value">12.2M</div>
             </div>
-            <div class="exec-value">12.2M</div>
-            <div class="exec-trend" style="color: var(--accent-emerald)">
-              ↑ 14% Annual Growth
+            <div class="exec-card">
+              <div class="exec-title">
+                Biological Tax <span class="tag tag-rose">Impact</span>
+              </div>
+              <div class="exec-value">₦2.4T</div>
             </div>
-          </div>
-          <div class="exec-card">
-            <div class="exec-title">
-              Biological Tax (Est.) <span class="tag tag-rose">Warning</span>
+            <div class="exec-card">
+              <div class="exec-title">Benefit Enrolment</div>
+              <div class="exec-value">34.2%</div>
             </div>
-            <div class="exec-value">₦2.4T</div>
-            <div class="exec-trend" style="color: var(--accent-rose)">
-              Cost of "Digital Friction"
-            </div>
-          </div>
-          <div class="exec-card">
-            <div class="exec-title">Portable Benefit Liquidity</div>
-            <div class="exec-value">₦412B</div>
-            <div class="exec-trend" style="color: var(--accent-cyan)">
-              NHIA Micro-flows
+            <div class="exec-card">
+              <div class="exec-title">Stress Incidence</div>
+              <div class="exec-value">High</div>
             </div>
           </div>
-          <div class="exec-card">
-            <div class="exec-title">National Cognitive Reserve</div>
-            <div class="exec-value">68.4%</div>
-            <div class="exec-trend" style="color: var(--accent-emerald)">
-              Stable Connectivity
+
+          <div class="grid-layout">
+            <div class="content-card">
+              <div class="section-title">
+                National Stress-Expenditure Correlation
+              </div>
+              <p
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-muted);
+                  margin-bottom: 20px;
+                "
+              >
+                As platform algorithms tighten rating requirements, public
+                hospital mental health admissions in urban centers increase by
+                12% quarterly.
+              </p>
+              <div class="chart-container">
+                <div class="chart-bar" style="height: 30%"></div>
+                <div class="chart-bar" style="height: 45%"></div>
+                <div class="chart-bar" style="height: 60%"></div>
+                <div
+                  class="chart-bar"
+                  style="height: 85%; background: var(--accent-rose)"
+                ></div>
+              </div>
+            </div>
+            <div class="content-card">
+              <div class="section-title">Policy Levers</div>
+              <div style="display: flex; flex-direction: column; gap: 12px">
+                <button
+                  style="
+                    padding: 12px;
+                    background: #1e293b;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 0.7rem;
+                    cursor: pointer;
+                    text-align: left;
+                  "
+                >
+                  Adjust Portable Benefit %
+                </button>
+                <button
+                  style="
+                    padding: 12px;
+                    background: #1e293b;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 0.7rem;
+                    cursor: pointer;
+                    text-align: left;
+                  "
+                >
+                  Enforce Algorithmic Rest
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- View: National Pulse -->
-        <div id="national-pulse" class="view active">
+        <!-- PERSPECTIVE: PLATFORM ADMIN (ORG) -->
+        <div id="perspective-org" class="perspective-view">
+          <div class="exec-grid">
+            <div class="exec-card">
+              <div class="exec-title">
+                Fleet Size <span class="tag tag-cyan">Internal</span>
+              </div>
+              <div class="exec-value">45.8k</div>
+            </div>
+            <div class="exec-card">
+              <div class="exec-title">
+                Churn Probability <span class="tag tag-rose">Risk</span>
+              </div>
+              <div class="exec-value">22%</div>
+            </div>
+            <div class="exec-card">
+              <div class="exec-title">Productivity Loss</div>
+              <div class="exec-value">₦14.2M</div>
+            </div>
+            <div class="exec-card">
+              <div class="exec-title">ESG Wellness Score</div>
+              <div class="exec-value">72/100</div>
+            </div>
+          </div>
+
           <div class="grid-layout">
             <div class="content-card">
-              <div class="section-title">The Stress-Inflation Loop</div>
+              <div class="section-title">Wellness vs. Fulfilment Rate</div>
               <p
                 style="
-                  color: var(--text-muted);
                   font-size: 0.85rem;
-                  margin-bottom: 30px;
+                  color: var(--text-muted);
+                  margin-bottom: 20px;
                 "
               >
-                Correlation between platform algorithm intensity and urban
-                health expenditure. Higher "Rating Anxiety" correlates directly
-                with 18% increase in mental health claims.
+                Monitoring how "Friction Points" in the driver app directly
+                correlate to decreased shift duration and increased accident
+                risk.
               </p>
-
               <div class="chart-container">
                 <div
                   class="chart-bar"
-                  style="height: 40%"
-                  data-value="Q1"
+                  style="height: 80%; background: var(--accent-emerald)"
                 ></div>
+                <div class="chart-bar" style="height: 70%"></div>
+                <div class="chart-bar" style="height: 40%"></div>
                 <div
                   class="chart-bar"
-                  style="height: 55%"
-                  data-value="Q2"
+                  style="height: 25%; background: var(--accent-rose)"
                 ></div>
-                <div
-                  class="chart-bar"
-                  style="height: 85%"
-                  data-value="Q3"
-                ></div>
-                <div
-                  class="chart-bar"
-                  style="height: 70%"
-                  data-value="Q4"
-                ></div>
-                <div
-                  class="chart-bar"
-                  style="height: 95%; background: var(--accent-rose)"
-                  data-value="Peak Stress"
-                ></div>
-              </div>
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  margin-top: 12px;
-                  font-size: 0.65rem;
-                  color: var(--text-muted);
-                "
-              >
-                <span>JAN</span><span>MAR</span><span>JUN</span><span>SEP</span
-                ><span>DEC</span>
               </div>
             </div>
-
             <div class="content-card">
-              <div class="section-title" style="font-size: 1rem">
-                Platform Friction Index
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 16px">
-                <div>
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: space-between;
-                      font-size: 0.75rem;
-                      margin-bottom: 6px;
-                    "
-                  >
-                    <span>Mobility Platforms (Logistics)</span>
-                    <span style="color: var(--accent-rose)">Critical</span>
-                  </div>
-                  <div
-                    style="height: 4px; background: #1e293b; border-radius: 2px"
-                  >
-                    <div
-                      style="
-                        width: 88%;
-                        height: 100%;
-                        background: var(--accent-rose);
-                      "
-                    ></div>
-                  </div>
-                </div>
-                <div>
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: space-between;
-                      font-size: 0.75rem;
-                      margin-bottom: 6px;
-                    "
-                  >
-                    <span>Creative & Tech Gig (Remote)</span>
-                    <span style="color: var(--accent-cyan)">Moderate</span>
-                  </div>
-                  <div
-                    style="height: 4px; background: #1e293b; border-radius: 2px"
-                  >
-                    <div
-                      style="
-                        width: 45%;
-                        height: 100%;
-                        background: var(--accent-cyan);
-                      "
-                    ></div>
-                  </div>
-                </div>
-                <div>
-                  <div
-                    style="
-                      display: flex;
-                      justify-content: space-between;
-                      font-size: 0.75rem;
-                      margin-bottom: 6px;
-                    "
-                  >
-                    <span>Hyper-local Services</span>
-                    <span style="color: var(--accent-emerald)">Optimal</span>
-                  </div>
-                  <div
-                    style="height: 4px; background: #1e293b; border-radius: 2px"
-                  >
-                    <div
-                      style="
-                        width: 22%;
-                        height: 100%;
-                        background: var(--accent-emerald);
-                      "
-                    ></div>
-                  </div>
-                </div>
-              </div>
-              <button
-                style="
-                  width: 100%;
-                  margin-top: 30px;
-                  padding: 12px;
-                  background: transparent;
-                  border: 1px solid var(--border-color);
-                  color: white;
-                  border-radius: 10px;
-                  font-size: 0.75rem;
-                  font-weight: 700;
-                  cursor: pointer;
-                "
-              >
-                DOWNLOAD FULL REPORT
-              </button>
-            </div>
-          </div>
-
-          <div class="content-card">
-            <div class="section-title">Strategic Intervention Roadmap</div>
-            <div
-              style="
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 24px;
-              "
-            >
-              <div
-                style="
-                  padding: 20px;
-                  border: 1px solid var(--border-color);
-                  border-radius: 16px;
-                "
-              >
-                <h4 style="color: var(--accent-cyan); margin-bottom: 8px">
-                  Phase 1: Legal Sandbox
-                </h4>
-                <p
+              <div class="section-title">Admin Controls</div>
+              <div style="display: flex; flex-direction: column; gap: 12px">
+                <button
                   style="
-                    font-size: 0.75rem;
-                    line-height: 1.5;
-                    color: var(--text-muted);
+                    padding: 12px;
+                    background: var(--primary-brand);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 0.7rem;
+                    cursor: pointer;
                   "
                 >
-                  Formalize "Portable Benefits" through the National Social
-                  Security framework. Pilot with 3 major ride-hailing platforms.
-                </p>
-              </div>
-              <div
-                style="
-                  padding: 20px;
-                  border: 1px solid var(--border-color);
-                  border-radius: 16px;
-                "
-              >
-                <h4 style="color: var(--primary-brand); margin-bottom: 8px">
-                  Phase 2: Data Portability
-                </h4>
-                <p
+                  Modify Driver Rest-Triggers
+                </button>
+                <button
                   style="
-                    font-size: 0.75rem;
-                    line-height: 1.5;
-                    color: var(--text-muted);
+                    padding: 12px;
+                    background: #1e293b;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 0.7rem;
+                    cursor: pointer;
                   "
                 >
-                  Enforce Health-Data standard APIs. Allow workers to move
-                  wellness telemetry between healthcare providers.
-                </p>
-              </div>
-              <div
-                style="
-                  padding: 20px;
-                  border: 1px solid var(--border-color);
-                  border-radius: 16px;
-                "
-              >
-                <h4 style="color: var(--accent-emerald); margin-bottom: 8px">
-                  Phase 3: Care-Centric Algos
-                </h4>
-                <p
-                  style="
-                    font-size: 0.75rem;
-                    line-height: 1.5;
-                    color: var(--text-muted);
-                  "
-                >
-                  Tax incentives for platforms that implement mandatory rest
-                  cycles and algorithmic transparency for health.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Section: Cognitive Justice -->
-        <div id="cognitive-justice" class="view">
-          <div class="content-card">
-            <h2>Cognitive Justice & Workforce Longevity</h2>
-            <p style="margin: 16px 0; color: var(--text-muted)">
-              Measuring the erosion of mental bandwidth under high-intensity
-              digital management.
-            </p>
-            <div
-              style="
-                background: #020617;
-                padding: 40px;
-                border-radius: 20px;
-                text-align: center;
-              "
-            >
-              <h3 style="color: var(--accent-cyan)">
-                Regional Distribution of "Algorithm Burnout"
-              </h3>
-              <div
-                style="
-                  height: 200px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                "
-              >
-                <span style="color: var(--text-muted); font-style: italic"
-                  >[Map Telemetry: Lagos (High), Abuja (Med), Kano (Low)]</span
-                >
+                  View ESG Audit Log
+                </button>
               </div>
             </div>
           </div>
@@ -697,18 +560,43 @@
     </main>
 
     <script>
-      function switchView(viewId, element) {
-        // Hide all views
+      function switchPerspective(role) {
+        // Toggle buttons
         document
-          .querySelectorAll(".view")
-          .forEach((v) => v.classList.remove("active"));
-        // Show selected view
-        document.getElementById(viewId).classList.add("active");
-        // Update nav styling
+          .getElementById("btn-gov")
+          .classList.toggle("active", role === "gov");
         document
-          .querySelectorAll(".nav-item")
-          .forEach((n) => n.classList.remove("active"));
-        element.classList.add("active");
+          .getElementById("btn-org")
+          .classList.toggle("active", role === "org");
+
+        // Toggle nav groups
+        document.getElementById("nav-gov").style.display =
+          role === "gov" ? "flex" : "none";
+        document.getElementById("nav-org").style.display =
+          role === "org" ? "flex" : "none";
+
+        // Toggle views
+        document
+          .getElementById("perspective-gov")
+          .classList.toggle("active", role === "gov");
+        document
+          .getElementById("perspective-org")
+          .classList.toggle("active", role === "org");
+
+        // Update titles/clearance
+        const title = document.getElementById("view-title");
+        const subtitle = document.getElementById("view-subtitle");
+        const clearance = document.getElementById("clearance-text");
+
+        if (role === "gov") {
+          title.innerText = "National Regulatory Dashboard";
+          subtitle.innerText = "Ministry of Health & Labor Oversight";
+          clearance.innerText = "Level 4: Fed. Regulator";
+        } else {
+          title.innerText = "Platform Operations Center";
+          subtitle.innerText = "Internal Workforce Sustainability & ESG";
+          clearance.innerText = "Level 2: Org. Administrator";
+        }
       }
     </script>
   </body>
