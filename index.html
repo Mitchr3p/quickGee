@@ -35,35 +35,33 @@
         padding: 40px;
       }
 
-      /* Navigation */
-      /* Navigation */
-      nav {
+      .main-navbar {
         display: flex;
-        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background: var(--bg-card);
+        border-radius: 16px;
+        border: 1px solid var(--border-light);
         margin-bottom: 30px;
-        padding: 10px;
-        background: var(--bg-slate);
-        border-radius: 12px;
-        border: 1px solid var(--border-slate);
-        overflow-x: auto;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
       }
 
-      nav button {
-        padding: 8px 16px;
-        border: none;
-        background: none;
-        cursor: pointer;
-        font-weight: 600;
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-links a {
         color: var(--text-muted);
-        border-radius: 8px;
-        white-space: nowrap;
-        transition: all 0.2s;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: color 0.2s;
       }
 
-      nav button.active {
-        background: white;
+      .nav-links a:hover {
         color: var(--primary-blue);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
       }
 
       /* Header */
@@ -266,6 +264,27 @@
   </head>
   <body>
     <header>
+      <nav class="main-navbar">
+        <div
+          style="
+            font-weight: 800;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            letter-spacing: -0.02em;
+          "
+        >
+          HEALTHFLOW
+        </div>
+        <div class="nav-links">
+          <a href="firstPage.html">Portal Home</a>
+          <a href="index.html">Overview</a>
+          <a href="secondStage.html" style="color: var(--primary-blue)"
+            >Stage 2: Map</a
+          >
+          <a href="workerDashboard.html">Worker UI</a>
+          <a href="dashboard.html">Admin Hub</a>
+        </div>
+      </nav>
       <h1>
         The Future of Health:
         <span class="highlight">Algorithmic Management</span>
