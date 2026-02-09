@@ -155,7 +155,7 @@
         font-weight: 700;
         width: 100%;
         cursor: pointer;
-        transition: background 0.2s;
+        transition: all 0.2s;
       }
 
       .submit-btn:hover {
@@ -501,6 +501,7 @@
             body: JSON.stringify(data),
           });
 
+          console.log(formData);
           // Transition UI
           formContent.style.display = "none";
           successMessage.style.display = "block";
