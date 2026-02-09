@@ -494,6 +494,7 @@
 
         try {
           // Sending to Webhook
+          console.log(formData);
           const response = await fetch(webhookUrl, {
             method: "POST",
             mode: "no-cors", // Common for cross-origin webhooks
@@ -501,7 +502,6 @@
             body: JSON.stringify(data),
           });
 
-          console.log(formData);
           // Transition UI
           formContent.style.display = "none";
           successMessage.style.display = "block";
