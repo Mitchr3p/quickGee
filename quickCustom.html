@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programme Development Guide</title>
+    <style>
+      /* Modern Corporate Styling for LBS Custom Programmes */
+      .lbs-form-container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        border-top: 6px solid #00afef;
+        font-family: "Inter", sans-serif;
+        color: #1e293b;
+        overflow: hidden;
+      }
+
+      .form-header {
+        padding: 40px;
+        background: #f8fafc;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .form-header h1 {
+        color: #2d3e71;
+        font-size: 28px;
+        font-weight: 800;
+        margin: 0 0 10px 0;
+        letter-spacing: -0.02em;
+      }
+
+      .form-header p {
+        color: #64748b;
+        font-size: 15px;
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .form-body {
+        padding: 40px;
+      }
+
+      .form-section {
+        margin-bottom: 35px;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #00afef;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #e2e8f0;
+        margin-left: 15px;
+      }
+
+      /* Field Layout */
+      .field-group {
+        margin-bottom: 20px;
+      }
+
+      .field-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #2d3e71;
+        margin-bottom: 8px;
+      }
+
+      .field-group input,
+      .field-group textarea,
+      .field-group select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 15px;
+        font-family: inherit;
+        box-sizing: border-box;
+        transition: all 0.2s;
+        outline: none;
+      }
+
+      .field-group input:focus,
+      .field-group textarea:focus {
+        border-color: #00afef;
+        box-shadow: 0 0 0 3px rgba(0, 175, 239, 0.1);
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      /* Radio/Checkboxes Styling */
+      .choice-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .choice-item {
+        position: relative;
+      }
+
+      .choice-item input {
+        display: none;
+      }
+
+      .choice-label {
+        display: block;
+        padding: 12px;
+        background: #fff;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .choice-item input:checked + .choice-label {
+        background: #2d3e71;
+        color: #fff;
+        border-color: #2d3e71;
+      }
+
+      /* Submit Button */
+      .form-footer {
+        padding: 0 40px 40px 40px;
+      }
+
+      .submit-btn {
+        background: #2d3e71;
+        color: #fff;
+        border: none;
+        padding: 18px 30px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        width: 100%;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .submit-btn:hover {
+        background: #1e294d;
+      }
+
+      .submit-btn:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+      }
+
+      /* Success Message Overlay */
+      #success-message {
+        display: none;
+        text-align: center;
+        padding: 60px 40px;
+      }
+
+      #success-message h2 {
+        color: #2d3e71;
+        margin-bottom: 15px;
+      }
+
+      #success-message p {
+        color: #64748b;
+        line-height: 1.6;
+      }
+
+      .check-icon {
+        width: 60px;
+        height: 60px;
+        background: #10b981;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        margin: 0 auto 20px auto;
+      }
+
+      @media (max-width: 600px) {
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .form-body {
+          padding: 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lbs-form-container">
+      <div id="form-content">
+        <header class="form-header">
+          <h1>Programme Development Guide</h1>
+          <p>
+            Kindly fill this form to document the expectations and requirements
+            for the programme to be delivered by the LBS Custom Executive
+            Education Department. This ensures our intervention aligns with your
+            strategic goals.
+          </p>
+        </header>
+
+        <form class="form-body" id="customEnquiry">
+          <!-- Section 1: Contact Person Information -->
+          <div class="form-section">
+            <div class="section-title">Contact Person Details</div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label for="contact_name">Full Name</label>
+                <input
+                  type="text"
+                  id="contact_name"
+                  name="contact_name"
+                  required
+                  placeholder="Who is filling this form?"
+                />
+              </div>
+              <div class="field-group">
+                <label for="contact_job_title">Job Title / Designation</label>
+                <input
+                  type="text"
+                  id="contact_job_title"
+                  name="contact_job_title"
+                  required
+                  placeholder="e.g. HR Director"
+                />
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label for="contact_email">Official Email Address</label>
+                <input
+                  type="email"
+                  id="contact_email"
+                  name="contact_email"
+                  required
+                  placeholder="email@company.com"
+                />
+              </div>
+              <div class="field-group">
+                <label for="contact_phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="contact_phone"
+                  name="contact_phone"
+                  required
+                  placeholder="+234..."
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Client Information -->
+          <div class="form-section">
+            <div class="section-title">Organisation Details</div>
+            <div class="field-group">
+              <label for="client_name">Client Name (Organization)</label>
+              <input
+                type="text"
+                id="client_name"
+                name="client_name"
+                required
+                placeholder="Enter organization name"
+              />
+            </div>
+            <div class="field-group">
+              <label for="programme_title"
+                >Proposed Programme Title / Theme</label
+              >
+              <input
+                type="text"
+                id="programme_title"
+                name="programme_title"
+                required
+                placeholder="e.g. Strategic Leadership for Senior Managers"
+              />
+            </div>
+          </div>
+
+          <!-- Section 3: Objectives & Scope -->
+          <div class="form-section">
+            <div class="section-title">Objectives & Challenges</div>
+            <div class="field-group">
+              <label for="programme_about"
+                >What should the programme be about?</label
+              >
+              <textarea
+                id="programme_about"
+                name="programme_focus"
+                rows="3"
+                required
+                placeholder="Briefly describe the focus areas..."
+              ></textarea>
+            </div>
+            <div class="field-group">
+              <label for="challenges"
+                >What challenges/gaps are you trying to address?</label
+              >
+              <textarea
+                id="challenges"
+                name="challenges_to_address"
+                rows="3"
+                required
+                placeholder="Describe the current pain points..."
+              ></textarea>
+            </div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label for="primary_obj">Primary Objective</label>
+                <input
+                  type="text"
+                  id="primary_obj"
+                  name="primary_objective"
+                  required
+                />
+              </div>
+              <div class="field-group">
+                <label for="secondary_obj">Secondary Objectives</label>
+                <input
+                  type="text"
+                  id="secondary_obj"
+                  name="secondary_objectives"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Participants -->
+          <div class="form-section">
+            <div class="section-title">Participant Profile</div>
+            <div class="grid-2">
+              <div class="field-group">
+                <label for="staff_level">Level of Staff Attending</label>
+                <select id="staff_level" name="participant_level">
+                  <option>Senior Management</option>
+                  <option>Middle Management</option>
+                  <option>Entry Level / Management Trainees</option>
+                  <option>Technical Staff</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label for="staff_count">No. of Staff Nominated</label>
+                <input
+                  type="number"
+                  id="staff_count"
+                  name="participant_count"
+                  required
+                  placeholder="Quantity"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Delivery -->
+          <div class="form-section">
+            <div class="section-title">Logistics & Delivery</div>
+            <div class="field-group">
+              <label>Preferred Delivery Mode</label>
+              <div class="choice-group">
+                <div class="choice-item">
+                  <input
+                    type="radio"
+                    name="delivery_mode"
+                    id="mode_classroom"
+                    value="Classroom"
+                    checked
+                  />
+                  <label for="mode_classroom" class="choice-label"
+                    >In Classroom</label
+                  >
+                </div>
+                <div class="choice-item">
+                  <input
+                    type="radio"
+                    name="delivery_mode"
+                    id="mode_virtual"
+                    value="Virtual"
+                  />
+                  <label for="mode_virtual" class="choice-label">Virtual</label>
+                </div>
+                <div class="choice-item">
+                  <input
+                    type="radio"
+                    name="delivery_mode"
+                    id="mode_hybrid"
+                    value="Hybrid"
+                  />
+                  <label for="mode_hybrid" class="choice-label">Hybrid</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label for="location">Preferred Location</label>
+              <select id="location" name="delivery_location">
+                <option>LBS Campus (Lekki)</option>
+                <option>Client's Office</option>
+                <option>External Location / Hotel</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Section 6: Impact -->
+          <div class="form-section">
+            <div class="section-title">Expected Outcomes</div>
+            <div class="field-group">
+              <label for="takeaways">What should participants take away?</label>
+              <textarea
+                id="takeaways"
+                name="key_takeaways"
+                rows="2"
+                required
+              ></textarea>
+            </div>
+            <div class="field-group">
+              <label for="impact"
+                >Expected on-the-job impact after intervention</label
+              >
+              <textarea
+                id="impact"
+                name="expected_impact"
+                rows="2"
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <button type="submit" id="submitBtn" class="submit-btn">
+              Request Custom Proposal
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Success Message -->
+      <div id="success-message">
+        <div class="check-icon">✓</div>
+        <h2>Requirements Received</h2>
+        <p>
+          Thank you for documenting your needs. A Programme Advisor from the
+          Custom Executive Education Department will review your guide and
+          contact you shortly to discuss the next steps.
+        </p>
+        <button
+          class="submit-btn"
+          style="width: auto; margin-top: 20px"
+          onclick="location.reload()"
+        >
+          Submit Another Guide
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("customEnquiry");
+      const submitBtn = document.getElementById("submitBtn");
+      const formContent = document.getElementById("form-content");
+      const successMessage = document.getElementById("success-message");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // UI Feedback
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Sending Requirements...";
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // REPLACE THIS URL WITH YOUR WEBHOOK
+        const webhookUrl =
+          "https://workflows-n8n.srhosting.tk/webhook-test/07136938-f308-45b4-ae6d-ebd91208257b";
+
+        try {
+          // Sending to Webhook
+          const response = await fetch(webhookUrl, {
+            method: "POST",
+            mode: "no-cors", // Common for cross-origin webhooks
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          // Transition UI
+          formContent.style.display = "none";
+          successMessage.style.display = "block";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } catch (error) {
+          console.error("Submission error:", error);
+          alert(
+            "There was an issue sending your request. Please try again or contact us directly.",
+          );
+          submitBtn.disabled = false;
+          submitBtn.innerText = "Request Custom Proposal";
+        }
+      });
+    </script>
+  </body>
+</html>
