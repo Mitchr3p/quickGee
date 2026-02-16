@@ -66,7 +66,6 @@
         margin-left: 15px;
       }
 
-      /* Field Layout */
       .field-group {
         margin-bottom: 20px;
       }
@@ -105,7 +104,6 @@
         gap: 20px;
       }
 
-      /* Radio/Checkboxes Styling */
       .choice-group {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -134,13 +132,17 @@
         transition: all 0.2s;
       }
 
+      .choice-label:hover {
+        color: #fff;
+        background: #00afef;
+      }
+
       .choice-item input:checked + .choice-label {
         background: #2d3e71;
         color: #fff;
         border-color: #2d3e71;
       }
 
-      /* Submit Button */
       .form-footer {
         padding: 0 40px 40px 40px;
       }
@@ -159,7 +161,7 @@
       }
 
       .submit-btn:hover {
-        background: #1e294d;
+        background: #00afef;
       }
 
       .submit-btn:disabled {
@@ -167,7 +169,6 @@
         cursor: not-allowed;
       }
 
-      /* Success Message Overlay */
       #success-message {
         display: none;
         text-align: center;
@@ -352,6 +353,8 @@
               <div class="field-group">
                 <label for="staff_level">Level of Staff Attending</label>
                 <select id="staff_level" name="participant_level">
+                  <option>All</option>
+                  <option>Executive Management</option>
                   <option>Senior Management</option>
                   <option>Middle Management</option>
                   <option>Entry Level / Management Trainees</option>
@@ -359,7 +362,9 @@
                 </select>
               </div>
               <div class="field-group">
-                <label for="staff_count">No. of Staff Nominated</label>
+                <label for="staff_count"
+                  >How many Staff are proposed to attend?</label
+                >
                 <input
                   type="number"
                   id="staff_count"
@@ -488,18 +493,21 @@
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        // REPLACE THIS URL WITH YOUR WEBHOOK
+        // FIXED: Sending 'data' directly instead of '[data]'
+        // This prevents the "body object in a body object" (body[0]) issue in n8n
+        const payload = data;
+
+        // Webhook URL
         const webhookUrl =
-          "https://workflows-n8n.srhosting.tk/webhook-test/07136938-f308-45b4-ae6d-ebd91208257b";
+          "https://n8n.positivemindsetinitiative.org/webhook-test/9db50a37-7042-4b59-bf39-fac830183f6c";
 
         try {
-          // Sending to Webhook
-          console.log(formData);
+          console.log("Sending Payload:", payload);
+
           const response = await fetch(webhookUrl, {
             method: "POST",
-            mode: "no-cors", // Common for cross-origin webhooks
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
+            body: JSON.stringify(payload),
           });
 
           // Transition UI
